@@ -1,0 +1,28 @@
+{% block content %}
+<html>
+<head>
+    <title>Покупка</title>
+</head>
+<body>
+<h1>Предмет {{ product.id }}</h1>
+<p>Описание</p>
+<p>{{ product.description }}</p>
+<button id="buy-button">Купить</button>
+<script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+      const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+      var buyButton = document.getElementById("buy-button");
+        buyButton.addEventListener('click', function() {
+    fetch("{% url 'buy' product.id %}", {method: 'GET'})
+    .then((result) => { return result.json(); })
+    .then((data) => {
+            console.log(data);
+            // Redirect to Stripe Checkout
+            return stripe.redirectToCheckout({sessionId: data.sessionId})
+          })
+          });
+
+    </script>
+</body>
+</html>
+{% endblock %}
