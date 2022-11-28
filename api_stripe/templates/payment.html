@@ -1,13 +1,13 @@
 {% block content %}
 <html>
 <head>
-    <title>Покупка</title>
+    <title>Buy Item {{ product.id }}</title>
 </head>
 <body>
-<h1>Предмет {{ product.id }}</h1>
-<p>Описание</p>
+<h1>Item {{ product.id }}</h1>
+<p>Description of Item {{ product.id }}</p>
 <p>{{ product.description }}</p>
-<button id="buy-button">Купить</button>
+<button id="buy-button">Buy</button>
 <script src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript">
       const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
